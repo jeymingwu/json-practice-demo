@@ -28,15 +28,20 @@ Java 的 JDK 中没有内置 JSON 的解析，所以需要借助第三方类库�
   + ```2.x```：开发状态，持续更新；
   + 两个版本使用不同的 Java 包名和 Maven GAV，并不互相兼容，但可共存；
 + 三大核心模块：
-  + ```Jackson-core```：Streaming 流处理模块；定义底层处理流的 API；
+  + ```Jackson-core```：核心包，Streaming 流（低级流）处理模块；定义底层处理流的 API；
     + Streaming JSON 解析器、生成器；
     + 开销少、损耗少、性能高、灵活性高；
     + 底层 API，易错性高、可读性差；
-    + 两种处理 JSON 的方式：
-      + 流式 API：将读取的 JSON 内容写入作为离散事件，JsonParser 读取数据，JsonGenerator 写入数据；
-      + 树模型：JSON 文件的内容在内存中以树状形式存储；较灵活；（类似 XML 中的 DOM 解析）
-  + ```Jackson-annotations```：Annotations 标准注解模块，包含标准的 Jackson 注解；
-  + ```Jackson-databind```：Databind 数据绑定模块，在 streaming 包上实现数据绑定支持；
+    + 流式 API：将读取的 JSON 内容写入作为离散事件；
+        + JsonParser 解析 Json；  
+        + JsonGenerator 生成 Json；
+    + 树模型：JSON 文件的内容在内存中以树状形式存储；较灵活；（类似 XML 中的 DOM 解析）
+  + ```Jackson-annotations```：注解包，Annotations 标准注解模块，包含标准的 Jackson 注解；
+  + ```Jackson-databind```：数据绑定包，Databind 数据绑定模块，在 streaming 包上实现数据绑定支持；
+    + 依赖 jackson-core 和 jackson-annotations 的支持；
+    + 提供两个解析方式的 API：（基于 ObjectMapper 实现）
+      + 基于“对象绑定”
+      + 基于“树模型”
 + Jackson 隶属于 ** FasterXML** 这个组织；
   + [FasterXML 官网](http://fasterxml.com/)
   + 该组织主要有：
@@ -44,6 +49,7 @@ Java 的 JDK 中没有内置 JSON 的解析，所以需要借助第三方类库�
     + Jackson 流的 JSON 解析器；
     + Aalto 非阻塞 XML 解析器；
     + 等等；
+  + Jackson 基于 jackson-dataformat-xml 组件处理 JavaBean 与 XML 的转换；
 + 参考文章：
   + [初识Jackson](https://www.yourbatman.cn/tags/Jackson)
 
